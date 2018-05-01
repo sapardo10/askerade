@@ -1,4 +1,4 @@
-
+import { Meteor } from 'meteor/meteor';
 /**
  * Meteor.loginWithMicrosoft(options, callback)
  *
@@ -9,6 +9,7 @@
  * @param options
  * @param callback
  */
+ /*
 Meteor.loginWithMicrosoft({
     requestOfflineToken: true,
     requestPermissions: ['wl.emails','wl.signin','wl.basic'] // Permission scopes are found here: https://msdn.microsoft.com/en-us/library/hh243648.aspx
@@ -20,3 +21,4 @@ Meteor.loginWithMicrosoft({
         console.log('Logged in!');
     }
 });
+*/

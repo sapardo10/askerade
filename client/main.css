@@ -6,7 +6,7 @@ body {
 
   background-color: #315481;
 
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  background-image: linear-gradient(to bottom, #000000, #FFFFFF 100%);
 
   background-attachment: fixed;
 
@@ -38,13 +38,13 @@ body {
 
 .container {
 
-  max-width: 600px;
+  max-width: 80%;
 
   margin: 0 auto;
 
   min-height: 100%;
 
-  background: white;
+  background: #F2F2F2;
 
 }
 
@@ -52,13 +52,13 @@ body {
 
 header {
 
-  background: #d2edf4;
-
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-
   padding: 20px 15px 15px 15px;
 
   position: relative;
+
+  font-size: 24px;
+
+  text-align: center;
 
 }
 
@@ -92,9 +92,11 @@ form {
 
   margin-top: 10px;
 
-  margin-bottom: -10px;
+  margin-bottom: 10px;
 
   position: relative;
+
+  max-height: 100%;
 
 }
 
@@ -217,6 +219,14 @@ header .hide-completed {
 .toggle-private {
 
   margin-left: 5px;
+
+}
+
+.btn-submit{
+  
+  background-color: #F0E302;
+
+  border: 2px;
 
 }
 

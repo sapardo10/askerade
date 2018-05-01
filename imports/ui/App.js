@@ -4,8 +4,10 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import { Tasks } from '../api/tasks.js';
+import { Questions } from '../api/questions.js';
 
 import Task from './Task.js';
+import Question from './Question.js';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 
 class App extends Component { 
@@ -28,6 +30,33 @@ class App extends Component {
 
   }
 
+  renderQuestions() {
+
+    let questions = this.props.questions;
+
+    questions = questions.filter(question => !question.completed);
+    
+    return questions.map((question) => {
+
+      const currentUserId = this.props.currentUser && this.props.currentUser._id;
+
+      return (
+
+        <Question
+
+          key={question._id}
+
+          question={question}
+
+        />
+
+      );
+
+    });
+
+  }
+
+
   renderTasks() {
 
     let filteredTasks = this.props.tasks;
@@ -38,7 +67,7 @@ class App extends Component {
     
     }
 
-        return filteredTasks.map((task) => {
+    return filteredTasks.map((task) => {
 
       const currentUserId = this.props.currentUser && this.props.currentUser._id;
 
@@ -68,11 +97,13 @@ class App extends Component {
 
     event.preventDefault();
 
-    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    const title = ReactDOM.findDOMNode(this.refs.title).value.trim();
+    const text = ReactDOM.findDOMNode(this.refs.text).value.trim();
 
-    Meteor.call('tasks.insert', text);
+    Meteor.call('questions.insert', title, text);
 
-    ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    ReactDOM.findDOMNode(this.refs.title).value = '';
+    ReactDOM.findDOMNode(this.refs.text).value = '';
 
   }
  
@@ -85,42 +116,53 @@ class App extends Component {
 
         <header>
 
-          <h1>Todo List ({this.props.incompleteCount})</h1>
+          <h1>Askerade</h1>
 
-          <label className="hide-completed">
-
-            <input
-              type="checkbox"
-              readOnly
-              checked={this.state.hideCompleted}
-              onClick={this.toggleHideCompleted.bind(this)}
-            />
-
-            Hide Completed Tasks
-
-          </label>
-
-          <AccountsUIWrapper />
-
-          { this.props.currentUser ?
-
-            <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-
-              <input
-                type="text"
-                ref="textInput"
-                placeholder="Type to add new tasks"
-              />
-            </form> : ''
-          }
+          <AccountsUIWrapper />         
 
         </header>
 
+         { this.props.currentUser ? (
+          <div>
+          <h2>Add a question!</h2>
+
+          <form className="new-question" onSubmit={this.handleSubmit.bind(this)}>
+
+            <div className="form-group">
+
+              <input
+                className="form-control"
+                type="text"
+                ref="title"
+                placeholder="Type the title of the question"
+              />            
+
+            </div>
+
+            <div className="form-group">
+
+              <input
+                className="form-control"
+                type="text"
+                ref="text"
+                placeholder="Type the question here"
+              />
+
+            </div>
+
+            <input
+              className="btn btn-submit"
+              type="submit"
+              placeholder="Add question"
+            />
+
+          </form></div>) : ''
  
+        }
 
         <ul>
 
-          {this.renderTasks()}
+          {this.renderQuestions()}
 
         </ul>
 
@@ -135,12 +177,14 @@ class App extends Component {
 export default withTracker(() => {
 
   Meteor.subscribe('tasks');
+  Meteor.subscribe('questions');
 
   return {
 
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
     currentUser: Meteor.user(),
+    questions: Questions.find({}, { sort: { createdAt: -1 } }).fetch(),
   };
 
 })(App);
