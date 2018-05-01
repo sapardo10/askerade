@@ -21,3 +21,5 @@ react-meteor-data
 accounts-ui
 accounts-password
 meteortesting:mocha
+q42:accounts-microsoft
+service-configuration
