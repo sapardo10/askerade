@@ -15,6 +15,7 @@ class App extends Component {
   constructor(props) {
 
     super(props); 
+    console.log("App "+JSON.stringify(props));
 
     this.state = {
       hideCompleted: false,
@@ -104,6 +105,8 @@ class App extends Component {
 
     ReactDOM.findDOMNode(this.refs.title).value = '';
     ReactDOM.findDOMNode(this.refs.text).value = '';
+
+    console.log(this.props.history);
 
   }
  

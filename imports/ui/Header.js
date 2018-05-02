@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 class Header extends Component {
+
+renderSurveys(){
+	if(this.props.surveys.length>0)
+	{
+		return <li><Link to='/surveys'>Surveys</Link></li>;
+	}
+	return "";
+}
+
+
   render() {
     return (
 		
@@ -14,6 +24,7 @@ class Header extends Component {
 			        <li><Link to='/products'>Productss</Link></li>
 			        <li><Link to='/trades'>Trades</Link></li>
 	        	*/
+	        	this.renderSurveys()
 	        }
 	        </ul>
 	    </nav>

@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base'; 
 import { Tasks } from '../imports/api/tasks.js';
 import { Questions } from '../imports/api/questions.js';
+import { Surveys } from '../imports/api/surveys.js';
 
 Meteor.startup(() => {
   // code to run on server at startup
