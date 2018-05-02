@@ -1,6 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
+import AppContainer from '../imports/ui/AppContainer.js';
+import { HashRouter  } from 'react-router-dom'
+
+
 
 /*
 *-------------------------------------------
@@ -33,6 +37,8 @@ import '../imports/startup/accounts-config.js';
 */
 
 Meteor.startup(() => {
-    render(<App />, document.getElementById('render-target'));
+    render((<HashRouter>
+    		<AppContainer />
+  		</HashRouter>), document.getElementById('render-target'));
 });
 
