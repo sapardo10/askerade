@@ -116,6 +116,10 @@ class App extends Component {
 
         <header>
 
+          <img src="/img/askerade-logo.png" className="logo"/>
+
+          <br/>
+
           <h1>Askerade</h1>
 
           <AccountsUIWrapper />         
